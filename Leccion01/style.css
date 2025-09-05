@@ -13,10 +13,10 @@ body {
 }
 
 .container {
-    margin: 2rem; /* Margen para el contenido dentro del contenedor */
-    background-color: rgba(244, 244, 249, 0.8); /* Fondo semitransparente para el contenido */
-    padding: 1rem; /* Espaciado interno */
-    border-radius: 8px; /* Bordes redondeados */
+    margin: 2rem; 
+    background-color: rgba(244, 244, 249, 0.8); 
+    padding: 1rem; 
+    border-radius: 8px; 
 }
 
 h1 {
@@ -47,10 +47,10 @@ li {
 }
 
 .status-in-process {
-    background-color: #ffc107; /* Amarillo */
+    background-color: #ffc107; 
 }
 
 .status-completed {
-    background-color: #28a745; /* Verde */
+    background-color: #28a745;
     color: white;
 }
