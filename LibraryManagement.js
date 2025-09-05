@@ -87,6 +87,40 @@ function actualizarDisponibilidad(titulo, nuevoEstado, callback) {
         }
     });
 }
+
+// Función para buscar libros por autor o género
+function buscarLibros(termino, tipo) {
+    console.log(`\n🔍 Buscando libros por ${tipo}: "${termino}"`);
+    
+    leerDatos((datos) => {
+        const resultados = datos.libros.filter(libro => {
+            if (tipo === 'autor') {
+                return libro.autor.toLowerCase().includes(termino.toLowerCase());
+            } else if (tipo === 'genero') {
+                return libro.genero.toLowerCase().includes(termino.toLowerCase());
+            }
+            return false;
+        });
+        
+        console.log("\n══════════════════════════════════════════════════════════");
+        console.log(`         📚 RESULTADOS DE BÚSQUEDA (${tipo}: "${termino}")`);
+        console.log("══════════════════════════════════════════════════════════");
+        
+        if (resultados.length === 0) {
+            console.log(`            No se encontraron libros con ${tipo}: "${termino}"`);
+        } else {
+            resultados.forEach((libro, index) => {
+                const estado = libro.disponible ? "✅ Disponible" : "❌ Prestado";
+                console.log(` ${index + 1}. ${libro.titulo}`);
+                console.log(`    👤 Autor: ${libro.autor}`);
+                console.log(`    📖 Género: ${libro.genero}`);
+                console.log(`    📍 Estado: ${estado}`);
+                console.log("──────────────────────────────────────────────────────");
+            });
+        }
+        console.log("══════════════════════════════════════════════════════════\n");
+    });
+}
 // Ejemplo de cómo ejecutar la aplicación
 mostrarLibros();
 agregarLibro("El principito", "Antoine de Saint-Exupéry", "Fábula", true);
