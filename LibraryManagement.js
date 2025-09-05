@@ -9,10 +9,21 @@ let biblioteca = {
 // Función para simular la lectura de datos (asimilar la lectura de un archivo JSON)
 function leerDatos(callback) {
     setTimeout(() => {
-        // Aquí simulas leer el JSON con un retraso de 1 segundo
+        console.log("📖 Leyendo datos de la biblioteca...");
         callback(biblioteca);
     }, 1000);
 }
+
+function escribirDatos(nuevosDatos, callback) {
+    setTimeout(() => {
+        console.log("💾 Guardando datos en la biblioteca...");
+        biblioteca = nuevosDatos;
+        if (callback) {
+            callback();
+        }
+    }, 1000);
+}
+
 
 // Función para mostrar todos los libros en consola
 function mostrarLibros() {
