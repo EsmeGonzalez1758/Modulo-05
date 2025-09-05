@@ -12,7 +12,7 @@ addOrderBtn.addEventListener('click', () => {
 function addOrder(order) {
     const listItem = document.createElement('li');
     listItem.id = `order-${order.id}`;
-    listItem.classList.add('status-in-process'); // Añadimos una clase para estilizar el estado inicial
+    listItem.classList.add('status-in-process'); 
     listItem.textContent = `Pedido #${order.id}: ${order.status}`;
     orderList.appendChild(listItem);
 }
