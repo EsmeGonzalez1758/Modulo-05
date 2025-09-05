@@ -63,13 +63,30 @@ function agregarLibro(titulo, autor, genero, disponible, callback) {
 }
 
 // Función para cambiar la disponibilidad de un libro
-function actualizarDisponibilidad(titulo, nuevoEstado) {
-    // Simula un retraso antes de actualizar la disponibilidad
-    setTimeout(() => {
-        // Pista: busca el libro por título y cambia la propiedad 'disponible' a nuevoEstado
-    }, 1000);
+function actualizarDisponibilidad(titulo, nuevoEstado, callback) {
+    console.log(`\n🔄 Actualizando disponibilidad de: "${titulo}"`);
+    
+    leerDatos((datos) => {
+        const libroIndex = datos.libros.findIndex(libro => 
+            libro.titulo.toLowerCase() === titulo.toLowerCase()
+        );
+        
+        if (libroIndex !== -1) {
+            const estadoAnterior = datos.libros[libroIndex].disponible;
+            datos.libros[libroIndex].disponible = nuevoEstado;
+            
+            escribirDatos(datos, () => {
+                const nuevoEstadoTexto = nuevoEstado ? "disponible" : "prestado";
+                const estadoAnteriorTexto = estadoAnterior ? "disponible" : "prestado";
+                console.log(`✅ Disponibilidad de "${titulo}" cambiada de ${estadoAnteriorTexto} a ${nuevoEstadoTexto}.`);
+                if (callback) callback();
+            });
+        } else {
+            console.log(`❌ Error: Libro con título "${titulo}" no encontrado.`);
+            if (callback) callback();
+        }
+    });
 }
-
 // Ejemplo de cómo ejecutar la aplicación
 mostrarLibros();
 agregarLibro("El principito", "Antoine de Saint-Exupéry", "Fábula", true);
