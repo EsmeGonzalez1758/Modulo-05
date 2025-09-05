@@ -32,3 +32,21 @@ async function processOrder(order) {
     updateOrderStatus(order, order.status);
 }
 
+function addOrder(order) {
+    const listItem = document.createElement('li');
+    listItem.id = `order-${order.id}`;
+    listItem.classList.add('status-in-process'); // Añadimos una clase para estilizar el estado inicial
+    listItem.textContent = `Pedido #${order.id}: ${order.status}`;
+    orderList.appendChild(listItem);
+}
+
+function updateOrderStatus(order, status) {
+    const listItem = document.getElementById(`order-${order.id}`);
+    if (listItem) {
+        listItem.textContent = `Pedido #${order.id}: ${status}`;
+        if (status === 'Completado') {
+            listItem.classList.remove('status-in-process');
+            listItem.classList.add('status-completed');
+        }
+    }
+}
