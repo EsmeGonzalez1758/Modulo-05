@@ -133,6 +133,55 @@ function buscarLibros(termino, tipo) {
     });
 }
 // Ejemplo de cómo ejecutar la aplicación
-mostrarLibros();
-agregarLibro("El principito", "Antoine de Saint-Exupéry", "Fábula", true);
-actualizarDisponibilidad("1984", false);
+console.log("🚀 Iniciando sistema de gestión de biblioteca...");
+console.log("⏳ Por favor espere, las operaciones pueden tomar unos segundos...");
+
+// Mostrar inventario inicial
+setTimeout(() => {
+    console.log("\n================================================");
+    console.log("          INVENTARIO INICIAL");
+    console.log("================================================");
+    mostrarLibros();
+    
+    // Agregar un nuevo libro después de 2 segundos
+    setTimeout(() => {
+        console.log("\n================================================");
+        console.log("          AGREGANDO NUEVO LIBRO");
+        console.log("================================================");
+        agregarLibro("El principito", "Antoine de Saint-Exupéry", "Fábula", true, () => {
+            // Mostrar inventario actualizado después de agregar el libro
+            setTimeout(() => {
+                console.log("\n================================================");
+                console.log("          INVENTARIO ACTUALIZADO");
+                console.log("================================================");
+                mostrarLibros();
+                
+                // Actualizar disponibilidad después de 2 segundos
+                setTimeout(() => {
+                    console.log("\n================================================");
+                    console.log("          ACTUALIZANDO DISPONIBILIDAD");
+                    console.log("================================================");
+                    actualizarDisponibilidad("1984", false, () => {
+                        // Mostrar inventario final
+                        setTimeout(() => {
+                            console.log("\n================================================");
+                            console.log("          INVENTARIO FINAL");
+                            console.log("================================================");
+                            mostrarLibros();
+                            
+                            // Realizar una búsqueda de ejemplo
+                            setTimeout(() => {
+                                console.log("\n================================================");
+                                console.log("         BÚSQUEDA");
+                                console.log("================================================");
+                                buscarLibros("Gabriel", "autor");
+                                
+                                console.log("🎉 ¡Proceso completado! Sistema de biblioteca listo para usar.");
+                            }, 1000);
+                        }, 1000);
+                    });
+                }, 2000);
+            }, 1000);
+        });
+    }, 3000);
+}, 1000);
