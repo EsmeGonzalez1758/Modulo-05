@@ -17,13 +17,25 @@ function leerDatos(callback) {
 // Función para mostrar todos los libros en consola
 function mostrarLibros() {
     leerDatos((datos) => {
-        console.log("Inventario de libros:");
-        datos.libros.forEach((libro, index) => {
-            console.log(`${index + 1}. ${libro.titulo} - ${libro.autor} (${libro.disponible ? 'Disponible' : 'Prestado'})`);
-        });
+        console.log("\n══════════════════════════════════════════════════════════");
+        console.log("               📚 INVENTARIO DE LIBROS 📚");
+        console.log("══════════════════════════════════════════════════════════");
+        
+        if (datos.libros.length === 0) {
+            console.log("            No hay libros en el inventario");
+        } else {
+            datos.libros.forEach((libro, index) => {
+                const estado = libro.disponible ? "✅ Disponible" : "❌ Prestado";
+                console.log(` ${index + 1}. ${libro.titulo}`);
+                console.log(`    👤 Autor: ${libro.autor}`);
+                console.log(`    📖 Género: ${libro.genero}`);
+                console.log(`    📍 Estado: ${estado}`);
+                console.log("──────────────────────────────────────────────────────");
+            });
+        }
+        console.log("══════════════════════════════════════════════════════════\n");
     });
 }
-
 // Función para agregar un nuevo libro
 function agregarLibro(titulo, autor, genero, disponible) {
     const nuevoLibro = { titulo, autor, genero, disponible };
