@@ -37,12 +37,29 @@ function mostrarLibros() {
     });
 }
 // Función para agregar un nuevo libro
-function agregarLibro(titulo, autor, genero, disponible) {
+function agregarLibro(titulo, autor, genero, disponible, callback) {
+    console.log(`\n➕ Agregando nuevo libro: "${titulo}"`);
+    
     const nuevoLibro = { titulo, autor, genero, disponible };
-    // Aquí falta la simulación de escribir el libro en el "archivo" (es decir, agregarlo al objeto)
-    setTimeout(() => {
-        // Pista: deberías agregar el nuevo libro a `biblioteca.libros`
-    }, 1000);
+    leerDatos((datos) => {
+        // Verificar si el libro ya existe
+        const libroExistente = datos.libros.find(libro => 
+            libro.titulo.toLowerCase() === titulo.toLowerCase() &&
+            libro.autor.toLowerCase() === autor.toLowerCase()
+        );
+        
+        if (libroExistente) {
+            console.log(`❌ El libro "${titulo}" de ${autor} ya existe en el inventario.`);
+            if (callback) callback();
+            return;
+        }
+        
+        datos.libros.push(nuevoLibro);
+        escribirDatos(datos, () => {
+            console.log(`✅ Libro "${titulo}" agregado exitosamente.`);
+            if (callback) callback();
+        });
+    });
 }
 
 // Función para cambiar la disponibilidad de un libro
